@@ -1,0 +1,21 @@
+<div>
+  <form [formGroup]="profileForm">
+    <fieldset>
+      <legend>Profile form</legend>
+      <fieldset>
+        <legend>Personal data</legend>
+        <label>First name</label>
+        <input type="text" formControlName="firstName" placeholder="First name">
+        <label>Last name</label>
+        <input type="text" formControlName="firstName" placeholder="Last name">
+      </fieldset>
+      <app-adress-form [legend]="'Home address'" [form]="profileForm.get('homeAddress')"></app-adress-form>
+      <app-adress-form [legend]="'Work address'" [form]="profileForm.get('workAddress')"></app-adress-form>
+      <app-color-picker formControlName="color"></app-color-picker>
+    </fieldset>
+  </form>
+  <button (click)="formSubmit();">Send</button>
+</div>
+<div>{{profileForm.value | json}}</div>
+<div>
+</div>

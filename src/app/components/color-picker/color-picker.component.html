@@ -1,0 +1,24 @@
+<form [formGroup]="colorForm">
+  <fieldset [disabled]="disabled">
+    <legend>Colorpicker</legend>
+    <fieldset [formGroup]="colorForm.get('rgb')">
+      <legend>RGB</legend>
+      <label>red</label>
+      <input type="number" formControlName="red">
+      <label>green</label>
+      <input type="number" formControlName="green">
+      <label>blue</label>
+      <input type="number" formControlName="blue">
+    </fieldset>
+    <fieldset disabled [formGroup]="colorForm.get('hsl')">
+      <legend>HSL</legend>
+      <label>red</label>
+      <input type="number" formControlName="hue">
+      <label>green</label>
+      <input type="number" formControlName="saturation">
+      <label>blue</label>
+      <input type="number" formControlName="lightness">
+    </fieldset>
+    <div class="color-example" [style.background]="color | async">{{color | async}}</div>
+  </fieldset>
+</form>
