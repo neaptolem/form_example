@@ -1,6 +1,7 @@
-import { AdressFormService } from './../adress-form/adress-form.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
+import { ProfileService } from '../../services/profile.service';
+import { AdressFormService } from './../adress-form/adress-form.service';
 
 @Component({
   selector: 'app-profile-form',
@@ -19,12 +20,33 @@ export class ProfileFormComponent implements OnInit {
 
   constructor(
     @Inject(FormBuilder) private fb: FormBuilder,
-    private adressFormService: AdressFormService) { }
-
-  ngOnInit() {
+    private adressFormService: AdressFormService,
+    private profileService: ProfileService) {
+    this.profileForm.valueChanges
+      .subscribe((res) => console.log(res));
+    this.profileForm.get('phones').valueChanges
+      .subscribe((res) => console.log(res));
   }
 
-  public formSubmit() { }
+  ngOnInit() {
+    this.profileService.getData()
+      .subscribe(data => {
+        this.profileForm.patchValue(data);
+        this.profileForm.setControl('phones', this.fb.array(data.phones));
+      });
+  }
 
+  public addPhone() {
+    const phoneArr = this.profileForm.get('phones') as FormArray;
+    phoneArr.push(new FormControl(''));
+  }
 
+  public formSubmit() {
+    console.log(this.profileForm.value);
+    this.profileForm.reset();
+  }
+
+  get phonesArr(): FormArray {
+    return this.profileForm.get('phones') as FormArray;
+  }
 }

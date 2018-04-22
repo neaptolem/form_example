@@ -4,20 +4,11 @@
     <fieldset [formGroup]="colorForm.get('rgb')">
       <legend>RGB</legend>
       <label>red</label>
-      <input type="number" formControlName="red">
+      <input type="number" formControlName="red" min="0" max="255">
       <label>green</label>
-      <input type="number" formControlName="green">
+      <input type="number" formControlName="green" min="0" max="255">
       <label>blue</label>
-      <input type="number" formControlName="blue">
-    </fieldset>
-    <fieldset disabled [formGroup]="colorForm.get('hsl')">
-      <legend>HSL</legend>
-      <label>red</label>
-      <input type="number" formControlName="hue">
-      <label>green</label>
-      <input type="number" formControlName="saturation">
-      <label>blue</label>
-      <input type="number" formControlName="lightness">
+      <input type="number" formControlName="blue" min="0" max="255">
     </fieldset>
     <div class="color-example" [style.background]="color | async">{{color | async}}</div>
   </fieldset>

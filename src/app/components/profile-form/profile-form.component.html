@@ -7,7 +7,16 @@
         <label>First name</label>
         <input type="text" formControlName="firstName" placeholder="First name">
         <label>Last name</label>
-        <input type="text" formControlName="firstName" placeholder="Last name">
+        <input type="text" formControlName="lastName" placeholder="Last name">
+      </fieldset>
+      <fieldset>
+        <legend>Phone number</legend>
+        <div formArrayName="phones">
+          <div *ngFor="let phone of phonesArr.controls; let i=index">
+            <input type="text" [formControlName]="i">
+          </div>
+        </div>
+        <button (click)="addPhone()">Add phone</button>
       </fieldset>
       <app-adress-form [legend]="'Home address'" [form]="profileForm.get('homeAddress')"></app-adress-form>
       <app-adress-form [legend]="'Work address'" [form]="profileForm.get('workAddress')"></app-adress-form>
